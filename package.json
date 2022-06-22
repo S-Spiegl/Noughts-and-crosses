@@ -1,0 +1,20 @@
+{
+  "name": "noughts-and-crosses",
+  "version": "1.0.0",
+  "description": "///////////////////////////////////////////////////////////////////////////////////////////",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/S-Spiegl/Noughts-and-crosses.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/S-Spiegl/Noughts-and-crosses/issues"
+  },
+  "homepage": "https://github.com/S-Spiegl/Noughts-and-crosses#readme"
+}
