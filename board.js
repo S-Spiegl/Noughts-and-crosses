@@ -1,6 +1,6 @@
 class Board {
   constructor() {
-
+    this.newBoard = this.new()
   }
 
   new() {
@@ -10,6 +10,6 @@ class Board {
       "|_|_|_|"
     ]
   }
-}
+} 
 
 module.exports = Board; 

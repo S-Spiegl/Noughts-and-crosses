@@ -1,6 +1,7 @@
 class Game {
-  constructor() {
-  
+  constructor(board, playerOne) {
+    this.board = board
+    this.playerOne = playerOne
   }
 
   checkMove() {
