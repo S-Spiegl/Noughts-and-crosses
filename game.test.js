@@ -47,6 +47,11 @@ describe('Game', () => {
       // }
 
         
+      //this works but is it testing anything other than that if you have a clean 
+      //board in the board's constructor, game is able to access it?
+      //the above test that does not work was intended to also test that the board 
+      //was instantiating a clean board on start up, but maybe that should be the 
+      //responsibility of the board test?
       const mockBoard = {
         newBoard: ([
           "|_|_|_|",
@@ -66,6 +71,44 @@ describe('Game', () => {
           "|_|_|_|",
         ]))
     })
+  })
+
+  describe('.checkMove', () => {
+    it('checks if a space is occupied, permitting a move if it is free', () => {
+      const mockBoard = {
+        newBoard: ([
+          "|_|_|_|",
+          "|_|_|X|",
+          "|_|O|_|",
+        ])
+      }
+
+      const mockPlayerOne = {
+        move: [1,0]
+      }
+
+      const game = new Game(mockBoard, mockPlayerOne);
+        expect(game.checkMove()).toEqual('move registered')
+    })    
+  })
+
+  describe('.checkMove', () => {
+    it('checks if a space is occupied, refusing a move if it is not free', () => {
+      const mockBoard = {
+        newBoard: ([
+          "|_|_|_|",
+          "|_|_|X|",
+          "|_|O|_|",
+        ])
+      }
+
+      const mockPlayerOne = {
+        move: [1,2]
+      }
+
+      const game = new Game(mockBoard, mockPlayerOne);
+        expect(game.checkMove()).toEqual('illegal move')
+    })    
   })
 })
 
