@@ -4,7 +4,8 @@
   "description": "///////////////////////////////////////////////////////////////////////////////////////////",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ./ --fix"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/S-Spiegl/Noughts-and-crosses/issues"
   },
-  "homepage": "https://github.com/S-Spiegl/Noughts-and-crosses#readme"
+  "homepage": "https://github.com/S-Spiegl/Noughts-and-crosses#readme",
+  "devDependencies": {
+    "eslint": "^8.18.0"
+  },
+  "dependencies": {
+    "eslint-plugin-jest": "^26.5.3"
+  }
 }
