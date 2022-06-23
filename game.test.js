@@ -6,17 +6,18 @@ describe('Game', () => {
    it('', () => {
     const mockBoard = {
       new: () => {
-      return "|_|_|_|",
-      "|_|_|_|",
-      "|_|_|_|"
-      }
+      return  [
+      "***",
+      "***",
+      "***"
+    ]}
     };
     // const mockPlayerOne = {
     //   move: () => {
     //     return [1,2]
 
     const mockPlayerOne = {
-      move: [1,2]
+      move: [[1],[2]]
     }
     const game = new Game(mockBoard, mockPlayerOne);
     // expect(game.checkMove()).toEqual('move registered')
@@ -25,7 +26,7 @@ describe('Game', () => {
     //   "|_|_|_|",
     //   "|_|_|_|",
     // ])
-    expect(game.playerOne.move).toEqual([1,2])
+    expect(game.playerOne.move).toEqual([[1],[2]])
    })
   })  
 
@@ -54,9 +55,9 @@ describe('Game', () => {
       //responsibility of the board test?
       const mockBoard = {
         newBoard: ([
-          "|_|_|_|",
-          "|_|_|_|",
-          "|_|_|_|",
+          "***",
+          "***",
+          "***"
         ])
       }
 
@@ -66,9 +67,9 @@ describe('Game', () => {
 
       const game = new Game(mockBoard, mockPlayerOne);
       expect(game.board.newBoard).toEqual(([
-          "|_|_|_|",
-          "|_|_|_|",
-          "|_|_|_|",
+        "***",
+        "***",
+        "***",
         ]))
     })
   })
@@ -77,9 +78,9 @@ describe('Game', () => {
     it('checks if a space is occupied, permitting a move if it is free', () => {
       const mockBoard = {
         newBoard: ([
-          "|_|_|_|",
-          "|_|_|X|",
-          "|_|O|_|",
+          "***",
+          "*X*",
+          "**O",
         ])
       }
 
@@ -96,19 +97,44 @@ describe('Game', () => {
     it('checks if a space is occupied, refusing a move if it is not free', () => {
       const mockBoard = {
         newBoard: ([
-          "|_|_|_|",
-          "|_|_|X|",
-          "|_|O|_|",
+          "***",
+          "*X*",
+          "**O",
         ])
       }
 
       const mockPlayerOne = {
-        move: [1,2]
+        move: [1,1]
       }
 
       const game = new Game(mockBoard, mockPlayerOne);
-        expect(game.checkMove()).toEqual('illegal move')
+        expect(game.checkMove()).toEqual('space taken')
     })    
+  })
+
+  describe('.updateBoard', () => {
+    it('adds an X to the board when playerOne makes a legal move', () => {
+      const mockBoard = {
+        newBoard: ([
+          "***",
+          "***",
+          "***"
+        ])
+      }
+
+      const mockPlayerOne = {
+        move: [1,1]
+      }
+      
+      const game = new Game(mockBoard, mockPlayerOne);
+      game.updateBoard();
+      expect(game.board.newBoard).toEqual(([
+        "***",
+        "*X*",
+        "***",
+        ]))
+
+    })
   })
 })
 
