@@ -1,17 +1,31 @@
 class TurnChecker {
-  constructor(game, playerOne, playerTwo) {
+  constructor(boardUpdater) {
     this.turns = []
-    this.game = game
-    this.playerOne = playerOne
-    this.playerTwo = playerTwo
+    this.boardUpdater = boardUpdater
+    // this.playerOne = playerOne
+    // this.playerTwo = playerTwo
+  }
+
+  updateTurns() {
+    if(this.boardUpdater.playerOnePlayed === true){
+      this.registerPlayerOneMove()
+    }
+    else if(this.boardUpdater.playerTwoPlayed === true){
+      this.registerPlayerTwoMove()
+    }
   }
 
   registerPlayerOneMove() {
-    this.turns.push('X')
+    if(this.turns[this.turns.length-1] != 'X'){
+      this.turns.push('X')
+    }
+
   }
 
   registerPlayerTwoMove() {
-    this.turns.push('O')
+    if(this.turns[this.turns.length-1] != 'O'){
+      this.turns.push('O')
+    }
   }
 }
 
