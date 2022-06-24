@@ -1,7 +1,8 @@
 const Game = require('./game')
+const PlayerOne = require('./playerOne')
+//haven't worked out how to mock one of the tests, hence the need for player...
 
 describe('Game', () => {
-
   describe('.playerOne', () => {
    it('', () => {
     const mockBoard = {
@@ -12,47 +13,17 @@ describe('Game', () => {
       "***"
     ]}
     };
-    // const mockPlayerOne = {
-    //   move: () => {
-    //     return [1,2]
-
+  
     const mockPlayerOne = {
-      move: [[1],[2]]
+      move: [1,2]
     }
     const game = new Game(mockBoard, mockPlayerOne);
-    // expect(game.checkMove()).toEqual('move registered')
-    // expect(game.board).toEqual([
-    //   "|_|X|_|",
-    //   "|_|_|_|",
-    //   "|_|_|_|",
-    // ])
-    expect(game.playerOne.move).toEqual([[1],[2]])
+    expect(game.playerOne.move).toEqual([1,2])
    })
   })  
 
   describe('.board', () => {
     it('shows a clean board at the beginning of the game', () => {
-      // const mockBoard = {
-        
-      //   // constructor: () => {
-      //   //   mockBoard.newBoard = mockBoard.new()
-      //   // },
-        
-      //   new: () => {
-      //   return "|_|_|_|",
-      //   "|_|_|_|",
-      //   "|_|_|_|"
-      //   },
-
-      //   newBoard: mockBoard.new()
-      // }
-
-        
-      //this works but is it testing anything other than that if you have a clean 
-      //board in the board's constructor, game is able to access it?
-      //the above test that does not work was intended to also test that the board 
-      //was instantiating a clean board on start up, but maybe that should be the 
-      //responsibility of the board test?
       const mockBoard = {
         newBoard: ([
           "***",
@@ -134,6 +105,70 @@ describe('Game', () => {
         "***",
         ]))
 
+    })
+
+    it("clears playerOne's move from the move array after updating the board", () => {
+      const mockBoard = {
+        newBoard: ([
+          "***",
+          "***",
+          "***"
+        ])
+      }
+
+      const mockPlayerOne = {
+        move: [1,1]
+ 
+      }
+
+      const game = new Game(mockBoard, mockPlayerOne);
+      game.updateBoard();
+      expect(game.playerOne.move).toEqual([])
+    })
+
+    it('retains the move information on the board', () => {
+
+      const mockBoard = {
+        newBoard: ([
+          "***",
+          "***",
+          "***"
+        ])
+      }
+      const playerOne = new PlayerOne;
+      const game = new Game(mockBoard, playerOne);
+      game.playerOne.enterMove(1,1)
+      game.updateBoard();
+      expect(game.board.newBoard).toEqual(([
+        "***",
+        "*X*",
+        "***",
+        ]))
+      game.playerOne.enterMove(0,2)
+      game.updateBoard();
+      expect(game.board.newBoard).toEqual(([
+        "**X",
+        "*X*",
+        "***",
+        ]))
+      game.playerOne.enterMove(2,0)
+      game.updateBoard();
+      expect(game.board.newBoard).toEqual(([
+        "**X",
+        "*X*",
+        "X**",
+        ]))
+
+        //haven't worked out how to mock this test...
+        //the problem is that this test relies on changing the 
+        //playerOne.move array after the first update to reflect the 
+        //next move, but by this point the mockPlayerOne's move has already been passed 
+        //as an argument to the game...
+        //one solution would be to set up the mockBoard as it would look after one go and 
+        //then mock the next move via mockPlayerOne. This will test that the game updates a board
+        //that already has an X on it but not that it's storing info from one move to the next...
+        // This will however be clearer once you pass a second player as an argument as it will be possible
+        //to move two inputs 
     })
   })
 })

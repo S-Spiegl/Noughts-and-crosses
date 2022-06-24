@@ -1,10 +1,3 @@
-//for node:
-// const Game = require('./game')
-// const PlayerOne = require('./playerOne');
-// const Board = require('./board');
-// const playerOne = new PlayerOne;
-// const board = new Board;
-
 class Game {
   constructor(board, playerOne) {
     this.board = board
@@ -23,28 +16,19 @@ class Game {
     //the coordinates with this.board.newBoard
   }
 
-  registerMove() {
-    return 'move registered'
-  }
-
-  refuseMove() {
-    return 'space taken'
-  }
-
   updateBoard() {
     const targetRowIndex = this.playerOne.move[0]
     const targetColumnIndex = this.playerOne.move[1]
-
+  
     if(this.board.newBoard[targetRowIndex][targetColumnIndex] === '*') {
-      const targetRow = this.board.newBoard[1].split('')
-      console.log('targetRow', targetRow)
-      const splicedTargetRow = targetRow.splice(1,1,'X')
-      console.log('spliced target row', splicedTargetRow)
-      console.log('targetRow', targetRow)
-      const replacementRow = targetRow.join('')
-      console.log('replacementRow', replacementRow)
-      this.board.newBoard.splice(targetRowIndex, 1, replacementRow)}
-    else{return 'space taken'}
+      const targetRow = this.board.newBoard[targetRowIndex].split('')
+      targetRow.splice(targetColumnIndex,1,'X')
+      const updatedRow = targetRow.join('')
+      this.board.newBoard.splice(targetRowIndex, 1, updatedRow)
+      this.playerOne.move = []}
+    else{
+      this.playerOne.move = []
+      return 'space taken'}
     
   }
 }
