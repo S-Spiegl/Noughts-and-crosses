@@ -2,8 +2,6 @@ class TurnChecker {
   constructor(boardUpdater) {
     this.turns = []
     this.boardUpdater = boardUpdater
-    // this.playerOne = playerOne
-    // this.playerTwo = playerTwo
   }
 
   updateTurns() {
@@ -19,7 +17,6 @@ class TurnChecker {
     if(this.turns[this.turns.length-1] != 'X'){
       this.turns.push('X')
     }
-
   }
 
   registerPlayerTwoMove() {
