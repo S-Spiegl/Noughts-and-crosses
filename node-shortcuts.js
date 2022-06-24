@@ -9,4 +9,4 @@ const playerTwo = new PlayerTwo;
 const board = new Board;
 const boardUpdater = new BoardUpdater(board, playerOne, playerTwo);
 const turnChecker = new TurnChecker(boardUpdater)
-const game = new Game(board, playerOne, playerTwo);
+const game = new Game(board, playerOne, playerTwo, boardUpdater, turnChecker);

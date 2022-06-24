@@ -26,21 +26,6 @@ describe('Board', () => {
         "***"
       ])
     })
-
-    it.skip('retains the move information on the board', () => {
-      
-
-      
-
-
-
-      expect(board.newBoard).toEqual(([
-        "***",
-        "*X*",
-        "***",
-        ]))
-
-    })
   })
   
 })

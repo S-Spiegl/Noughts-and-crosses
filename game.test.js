@@ -198,6 +198,29 @@ describe('Game', () => {
         //to move two inputs 
     })
   })
+
+  describe('.playerOneEnterMove', () => {
+    it('tells playerOne if they try to play two consecutive turns', () => {
+      // const mockBoard = {
+      //   newBoard: ([
+      //     "***",
+      //     "*X*",
+      //     "***",
+      //   ])
+      // }
+
+      // const mockPlayerOne = {
+      //   move: [1,2]
+      // }
+
+      const mockTurnChecker = {
+        turns: ['X']
+      }
+
+      const game = new Game(mockTurnChecker);
+        expect(game.playerOneEnterMove()).toEqual('not your turn')
+    })    
+  })
 })
 
 
