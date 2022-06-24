@@ -107,6 +107,33 @@ describe('Game', () => {
 
     })
 
+    it('adds an O to the board when playerTwo makes a legal move', () => {
+      const mockBoard = {
+        newBoard: ([
+          "***",
+          "***",
+          "***"
+        ])
+      }
+
+      const mockPlayerOne = {
+        move: []
+      }
+
+      const mockPlayerTwo = {
+        move: [1,1]
+      }
+      
+      const game = new Game(mockBoard, mockPlayerOne, mockPlayerTwo);
+      game.updateBoard();
+      expect(game.board.newBoard).toEqual(([
+        "***",
+        "*O*",
+        "***",
+        ]))
+
+    })
+
     it("clears playerOne's move from the move array after updating the board", () => {
       const mockBoard = {
         newBoard: ([
