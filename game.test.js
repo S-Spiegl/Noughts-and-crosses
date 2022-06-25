@@ -130,6 +130,8 @@ describe('Game', () => {
       // expect(game.playerOneEnterMove()).toEqual('space taken')
       game.playerOneEnterMove(1,1);
       expect(game.playerOne.move).toEqual([])
+
+      //not working. Do you need to call return somewhere?
     })
   })
 
@@ -210,6 +212,23 @@ describe('Game', () => {
 
       const game = new Game(mockBoard);
       expect(game.callGame()).toEqual('Player Two wins!')
+    })
+
+    it('calls a draw if all the board is filled and there is no winner', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XOX",
+          "XOO",
+          "OXX",
+        ])
+
+        
+        boardFull: () => {
+          return true}
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Draw!')
     })
   })
 })

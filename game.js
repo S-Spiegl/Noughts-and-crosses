@@ -79,30 +79,44 @@ class Game {
   }
 
   callGame() {
-    if(this.board.newBoard[0] === "XXX" || 
+    if(this.playerOneWins()){
+      this.gameOver = true
+      return 'Player One wins!'
+    }
+    else if(this.playerTwoWins()
+            ){
+      this.gameOver = true
+      return 'Player Two wins!'
+    }
+    else if(this.playerOneWins() === false && this.playerTwoWins() === false){
+      this.gameOver = true
+      return 'Draw!'}
+  }
+
+  playerOneWins() {
+      if(this.board.newBoard[0] === "XXX" || 
         this.board.newBoard[1] === "XXX" || 
         this.board.newBoard[2] === "XXX" ||
         this.board.newBoard[0][0] === "X" && this.board.newBoard[1][0] === "X" && this.board.newBoard[2][0] === "X" ||
         this.board.newBoard[0][1] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][1] === "X" ||
         this.board.newBoard[0][2] === "X" && this.board.newBoard[1][2] === "X" && this.board.newBoard[2][2] === "X" ||
         this.board.newBoard[0][0] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][2] === "X" ||
-        this.board.newBoard[0][2] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][0] === "X"
-        ){
-      this.gameOver = true
-      return 'Player One wins!'
-    }
-    else if(this.board.newBoard[0] === "OOO" || 
-            this.board.newBoard[1] === "OOO" || 
-            this.board.newBoard[2] === "OOO" ||
-            this.board.newBoard[0][0] === "O" && this.board.newBoard[1][0] === "O" && this.board.newBoard[2][0] === "O" ||
-            this.board.newBoard[0][1] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][1] === "O" ||
-            this.board.newBoard[0][2] === "O" && this.board.newBoard[1][2] === "O" && this.board.newBoard[2][2] === "O" ||
-            this.board.newBoard[0][0] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][2] === "O" ||
-            this.board.newBoard[0][2] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][0] === "O"
-            ){
-      this.gameOver = true
-      return 'Player Two wins!'
-    }
+        this.board.newBoard[0][2] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][0] === "X")
+        {return true}
+      else{return false}
+  }
+
+  playerTwoWins() {
+    if(this.board.newBoard[0] === "OOO" || 
+    this.board.newBoard[1] === "OOO" || 
+    this.board.newBoard[2] === "OOO" ||
+    this.board.newBoard[0][0] === "O" && this.board.newBoard[1][0] === "O" && this.board.newBoard[2][0] === "O" ||
+    this.board.newBoard[0][1] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][1] === "O" ||
+    this.board.newBoard[0][2] === "O" && this.board.newBoard[1][2] === "O" && this.board.newBoard[2][2] === "O" ||
+    this.board.newBoard[0][0] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][2] === "O" ||
+    this.board.newBoard[0][2] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][0] === "O")
+      {return true}
+    else{return false}
   }
 }
 
