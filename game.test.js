@@ -31,11 +31,11 @@ describe('Game', () => {
         ])
       }
 
-      const mockPlayerOne = {
-        move: [1,2]
-      }
+      // const mockPlayerOne = {
+      //   move: [1,2]
+      // }
 
-      const game = new Game(mockBoard, mockPlayerOne);
+      const game = new Game(mockBoard);
       expect(game.board.newBoard).toEqual(([
         "***",
         "***",
@@ -59,7 +59,8 @@ describe('Game', () => {
       }
 
       const game = new Game(mockBoard, mockPlayerOne);
-        expect(game.checkMove()).toEqual('move registered')
+      game.checkPlayerOneMove();
+      expect(game.movePermitted).toEqual(true)
     })    
   })
 
@@ -76,14 +77,16 @@ describe('Game', () => {
       const mockPlayerOne = {
         move: [1,1]
       }
+      
 
       const game = new Game(mockBoard, mockPlayerOne);
-        expect(game.checkMove()).toEqual('space taken')
+      game.checkPlayerOneMove();
+        expect(game.movePermitted).toEqual(false)
     })    
   })
 
   describe('.playerOneEnterMove', () => {
-    it('tells playerOne if they try to play two consecutive turns', () => {
+    it.skip('tells playerOne if they try to play two consecutive turns', () => {
       // const mockBoard = {
       //   newBoard: ([
       //     "***",
@@ -103,41 +106,110 @@ describe('Game', () => {
       }
 
       const game = new Game(mockTurnChecker);
-        expect(game.playerOneEnterMove()).toEqual('not your turn')
-    })    
+        expect(game.playerOneEnterMove(1,2)).toEqual('not your turn')
+    })  
+    
+    it.skip('resets the player move array to [] if a space is taken to allow them to enter new coordinates', () => {
+      const mockBoard = {
+        newBoard: ([
+          "***",
+          "*X*",
+          "**O",
+        ])
+      }
+
+      const mockTurnChecker = {
+        turns: ['X', 'O']
+      }
+
+      const mockPlayerOne = {
+        move: [1,1]
+      }
+
+      const game = new Game(mockBoard, mockPlayerOne, mockTurnChecker);
+      // expect(game.playerOneEnterMove()).toEqual('space taken')
+      game.playerOneEnterMove(1,1);
+      expect(game.playerOne.move).toEqual([])
+    })
+  })
+
+  describe('.callGame', () => {
+    it('calls the game for playerOne if there are three horizontal Xs', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XXX",
+          "*O*",
+          "**O",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player One wins!')
+    })
+
+    it('calls the game for playerTwo if there are three horizontal Os', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XX*",
+          "OOO",
+          "X**",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player Two wins!')
+    })
+
+    it('calls the game for playerOne if there are three vertical Xs', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XO*",
+          "XO*",
+          "X**",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player One wins!')
+    })
+
+    it('calls the game for playerOne if there are three Xs in a diagonal', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XO*",
+          "*XO",
+          "**X",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player One wins!')
+    })
+
+    it('calls the game for playerTwo if there are three vertical Os', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XOX",
+          "XO*",
+          "*O*",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player Two wins!')
+    })
+
+    it('calls the game for playerTwo if there are three Os in a diagonal', () => {
+      const mockBoard = {
+        newBoard: ([
+          "XXO",
+          "*O*",
+          "O*X",
+        ])
+      }
+
+      const game = new Game(mockBoard);
+      expect(game.callGame()).toEqual('Player Two wins!')
+    })
   })
 })
-
-
-// const Game = require('./game')
-// const PlayerOne = require('./playerOne')
-// const Board = require('./board')
-// jest.mock('./playerOne')
-// jest.mock('./board')
-
-// describe('Game', () => {
-
-//   let game;
-//   let mockBoard;
-//   let mockPlayerOne;
-
-//   beforeEach(() => {
-//     mockBoard = new Board;
-//     mockPlayerOne = new PlayerOne;
-//     game = new Game(mockBoard, mockPlayerOne);
-//   });
-
-//   describe('', () => {
-//    it('', () => {
-//     mockPlayerOne.enterMove(1,2)
-//     expect(game.checkMove()).toEqual('move registered')
-//     expect(game.board).toEqual([
-//       "|_|X|_|",
-//       "|_|_|_|",
-//       "|_|_|_|",
-//     ])
-//    })
-//   })  
-// })
-
-
