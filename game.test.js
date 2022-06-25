@@ -1,5 +1,6 @@
 const Game = require('./game')
-//haven't worked out how to mock one of the tests, hence the need for player...
+
+
 
 describe('Game', () => {
   describe('.board', () => {
@@ -11,10 +12,6 @@ describe('Game', () => {
           "***"
         ])
       }
-
-      // const mockPlayerOne = {
-      //   move: [1,2]
-      // }
 
       const game = new Game(mockBoard);
       expect(game.board.newBoard).toEqual(([
@@ -67,28 +64,6 @@ describe('Game', () => {
   })
 
   describe('.playerOneEnterMove', () => {
-    it.skip('tells playerOne if they try to play two consecutive turns', () => {
-      // const mockBoard = {
-      //   newBoard: ([
-      //     "***",
-      //     "*X*",
-      //     "***",
-      //   ])
-      // }
-
-      //need to mock the updater
-
-      // const mockPlayerOne = {
-      //   move: [1,2]
-      // }
-
-      const mockTurnChecker = {
-        turns: ['X']
-      }
-
-      const game = new Game(mockTurnChecker);
-        expect(game.playerOneEnterMove(1,2)).toEqual('not your turn')
-    })  
     
     it.skip('resets the player move array to [] if a space is taken to allow them to enter new coordinates', () => {
       const mockBoard = {

@@ -1,6 +1,4 @@
 const BoardUpdater = require('./boardUpdater')
-// const Player = require('./player')
-// const PlayerTwo = require('./playerTwo')
 
 describe('.updateBoard', () => {
   it('adds an X to the board when playerOne makes a legal move', () => {
