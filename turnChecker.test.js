@@ -1,6 +1,16 @@
 const TurnChecker = require('./turnChecker')
 
 describe('TurnChecker', () => {
+
+  describe('', () => {
+    it('increments turnCounter', () => {
+    
+      const turnChecker = new TurnChecker()
+      turnChecker.incrementTurnCounter()
+      expect(turnChecker.turnCounter).toEqual(1)
+    })
+  })
+
   describe('.checkTurn', () => {
     it('adds an X to its array after playerOne takes their go', () => {
       const mockBoardUpdater = {
@@ -42,7 +52,7 @@ describe('TurnChecker', () => {
       turnChecker.turns = ['X', 'O']
       turnChecker.updateTurns()
       expect(turnChecker.turns).toEqual(['X', 'O'])
-    })
+    }) 
   })
   
 })

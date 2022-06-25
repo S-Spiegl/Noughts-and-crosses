@@ -1,4 +1,4 @@
-class PlayerOne {
+class Player {
   constructor() {
     this.move = []
   }
@@ -9,4 +9,4 @@ class PlayerOne {
 
 }
 
-module.exports = PlayerOne;
+module.exports = Player;

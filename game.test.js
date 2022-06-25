@@ -2,25 +2,6 @@ const Game = require('./game')
 //haven't worked out how to mock one of the tests, hence the need for player...
 
 describe('Game', () => {
-  describe('.playerOne', () => {
-   it('', () => {
-    const mockBoard = {
-      new: () => {
-      return  [
-      "***",
-      "***",
-      "***"
-    ]}
-    };
-  
-    const mockPlayerOne = {
-      move: [1,2]
-    }
-    const game = new Game(mockBoard, mockPlayerOne);
-    expect(game.playerOne.move).toEqual([1,2])
-   })
-  })  
-
   describe('.board', () => {
     it('shows a clean board at the beginning of the game', () => {
       const mockBoard = {

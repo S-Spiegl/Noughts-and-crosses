@@ -1,7 +1,12 @@
 class TurnChecker {
   constructor(boardUpdater) {
+    this.turnCounter = 0
     this.turns = []
     this.boardUpdater = boardUpdater
+  }
+
+  incrementTurnCounter() {
+    this.turnCounter += 1
   }
 
   updateTurns() {
