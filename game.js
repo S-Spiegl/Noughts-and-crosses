@@ -6,6 +6,7 @@ class Game {
     this.boardUpdater = boardUpdater
     this.turnChecker = turnChecker
     this.movePermitted = false
+    this.gameOver = false
   }
 
   //instead of having individual player classes have one player class and alternate symbols based on
@@ -24,7 +25,10 @@ class Game {
       else{
         this.boardUpdater.updateBoard()
         this.turnChecker.updateTurns()
+        this.callGame()
         this.movePermitted = false
+        if(this.gameOver === true)
+        {return this.callGame()}
         }
       }
     else{return 'not your turn'}
@@ -41,7 +45,11 @@ class Game {
       else{
     this.boardUpdater.updateBoard()
     this.turnChecker.updateTurns()
-    this.movePermitted = false}
+    this.callGame()
+    this.movePermitted = false
+      if(this.gameOver === true)
+        {return this.callGame()}
+      }
     }
     else{return 'not your turn'}
   }
@@ -80,6 +88,7 @@ class Game {
         this.board.newBoard[0][0] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][2] === "X" ||
         this.board.newBoard[0][2] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][0] === "X"
         ){
+      this.gameOver = true
       return 'Player One wins!'
     }
     else if(this.board.newBoard[0] === "OOO" || 
@@ -91,6 +100,7 @@ class Game {
             this.board.newBoard[0][0] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][2] === "O" ||
             this.board.newBoard[0][2] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][0] === "O"
             ){
+      this.gameOver = true
       return 'Player Two wins!'
     }
   }
