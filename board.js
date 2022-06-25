@@ -12,10 +12,8 @@ class Board {
   }
 
   boardFull() {
-    if(this.newBoard[0].includes('*') === false 
-    && this.newBoard[1].includes('*') === false
-    && this.newBoard[2].includes('*') === false)
-    {return true}
+    if(this.newBoard.join('').includes('*'))
+    {return false}
   }
 } 
 

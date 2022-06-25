@@ -79,3 +79,16 @@ adds an O to the board in the position
 returns visualisation of board
 
 ![planning-board](public/images/diagram.png)
+
+
+Refactoring...
+
+Combine playerOne and playerTwo into a player class, and just have them input their symbol 
+
+OR
+
+track the turns and assign odd goes to playerOne and even goes to playerTwo
+
+still have a couple of failing tests, due to issues mocking the turnChecker and also issues mocking two methods from within the same mocked class... see the three skipped tests in game.test
+
+could the game benefit from an engine that asked for user input. Would this just be a case of renaming the game class?
