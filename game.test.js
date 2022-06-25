@@ -40,7 +40,7 @@ describe('Game', () => {
       }
 
       const game = new Game(mockBoard, mockPlayerOne);
-      game.checkPlayerOneMove();
+      game.checkMove();
       expect(game.movePermitted).toEqual(true)
     })    
   })
@@ -61,7 +61,7 @@ describe('Game', () => {
       
 
       const game = new Game(mockBoard, mockPlayerOne);
-      game.checkPlayerOneMove();
+      game.checkMove();
         expect(game.movePermitted).toEqual(false)
     })    
   })

@@ -17,7 +17,7 @@ describe('.updateBoard', () => {
     }
 
     const mockTurnChecker = {
-      turnCounter: 1
+      turnCounter: 0
     }
     
     const boardUpdater = new BoardUpdater(mockBoard, mockPlayer, mockTurnChecker);
@@ -44,7 +44,7 @@ describe('.updateBoard', () => {
     }
 
     const mockTurnChecker = {
-      turnCounter: 2
+      turnCounter: 1
     }
     
     const boardUpdater = new BoardUpdater(mockBoard, mockPlayer, mockTurnChecker);
