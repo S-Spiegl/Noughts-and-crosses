@@ -92,3 +92,8 @@ track the turns and assign odd goes to playerOne and even goes to playerTwo
 still have a couple of failing tests, due to issues mocking the turnChecker and also issues mocking two methods from within the same mocked class... see the three skipped tests in game.test
 
 could the game benefit from an engine that asked for user input. Would this just be a case of renaming the game class?
+
+////////
+
+Get those skipped tests to pass, or at least the one that determines a draw...
+Next steps. Update readme to include instructions

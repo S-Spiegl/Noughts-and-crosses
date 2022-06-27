@@ -19,6 +19,7 @@ class Game {
         this.turnChecker.incrementTurnCounter()
         this.callGame()
         this.movePermitted = false
+        console.log(this.board.newBoard.join('\r\n'))
       }
     if(this.gameOver === true)
       {return this.callGame()}
@@ -46,7 +47,7 @@ class Game {
       this.gameOver = true
       return 'Player Two wins!'
     }
-    else if(this.playerOneWins() === false && this.playerTwoWins() === false && this.board.boardFull === true){
+    else if(this.playerOneWins() === false && this.playerTwoWins() === false && this.board.boardFull() === true){
       this.gameOver = true
       return 'Draw!'}
   }
