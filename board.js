@@ -25,7 +25,7 @@ class Board {
   }
 
   boardFull() {
-    if(this.newBoard.join('').includes('*'))
+    if(this.board.join('').includes('*'))
     {return false}
     else{return true}
   }

@@ -12,20 +12,20 @@ class Game {
   enterMove(row, column) {
     this.result = ""
     this.playerMove = this.player.enterMove(row, column)
-    // this.checkMove()
-    // if(this.movePermitted === false){
-    //   return 'space taken'
-    //   }
-    //   else{
-    //     this.boardUpdater.updateBoard()
-    //     this.turnChecker.incrementTurnCounter()
-    //     this.callGame()
-    //     this.movePermitted = false
-    //     console.log(this.board.newBoard.join('\r\n'))
-    //   }
-    // if(this.gameOver === true){
-    //   this.resetBoard()
-    //   return this.result}
+    this.checkMove()
+    if(this.movePermitted === false){
+      return 'space taken'
+      }
+      else{
+        this.updateBoard()
+        this.turnChecker.incrementTurnCounter()
+        this.callGame()
+        this.movePermitted = false
+        console.log(this.board.board.join('\r\n'))
+      }
+    if(this.gameOver === true){
+      this.resetBoard()
+      return this.result}
   }
 
   updateBoard() {
@@ -95,14 +95,14 @@ class Game {
   }
 
   playerTwoWins() {
-    if(this.board.newBoard[0] === "OOO" || 
-    this.board.newBoard[1] === "OOO" || 
-    this.board.newBoard[2] === "OOO" ||
-    this.board.newBoard[0][0] === "O" && this.board.newBoard[1][0] === "O" && this.board.newBoard[2][0] === "O" ||
-    this.board.newBoard[0][1] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][1] === "O" ||
-    this.board.newBoard[0][2] === "O" && this.board.newBoard[1][2] === "O" && this.board.newBoard[2][2] === "O" ||
-    this.board.newBoard[0][0] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][2] === "O" ||
-    this.board.newBoard[0][2] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][0] === "O")
+    if(this.board.board[0] === "OOO" || 
+    this.board.board[1] === "OOO" || 
+    this.board.board[2] === "OOO" ||
+    this.board.board[0][0] === "O" && this.board.board[1][0] === "O" && this.board.board[2][0] === "O" ||
+    this.board.board[0][1] === "O" && this.board.board[1][1] === "O" && this.board.board[2][1] === "O" ||
+    this.board.board[0][2] === "O" && this.board.board[1][2] === "O" && this.board.board[2][2] === "O" ||
+    this.board.board[0][0] === "O" && this.board.board[1][1] === "O" && this.board.board[2][2] === "O" ||
+    this.board.board[0][2] === "O" && this.board.board[1][1] === "O" && this.board.board[2][0] === "O")
       {return true}
     else{return false}
   }
