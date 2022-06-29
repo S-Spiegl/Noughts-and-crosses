@@ -4,6 +4,10 @@ class Game {
     this.player = player
     this.boardUpdater = boardUpdater
     this.turnChecker = turnChecker
+    // this.playerMove = this.player.enterMove()
+    //need to have playerMove = the return value from player.enterMove()
+    //this appears to be correct, according to node... so the fact that it isn't recognising enterMove() as
+    //a function might have something to do with the test?
     this.movePermitted = false
     this.gameOver = false
     this.result = ""
@@ -11,27 +15,27 @@ class Game {
 
   enterMove(row, column) {
     this.result = ""
-    this.player.enterMove(row, column)
-    this.checkMove()
-    if(this.movePermitted === false){
-      return 'space taken'
-      }
-      else{
-        this.boardUpdater.updateBoard()
-        this.turnChecker.incrementTurnCounter()
-        this.callGame()
-        this.movePermitted = false
-        console.log(this.board.newBoard.join('\r\n'))
-      }
-    if(this.gameOver === true){
-      this.resetBoard()
-      return this.result}
+    this.playerMove = this.player.enterMove(row, column)
+    // this.checkMove()
+    // if(this.movePermitted === false){
+    //   return 'space taken'
+    //   }
+    //   else{
+    //     this.boardUpdater.updateBoard()
+    //     this.turnChecker.incrementTurnCounter()
+    //     this.callGame()
+    //     this.movePermitted = false
+    //     console.log(this.board.newBoard.join('\r\n'))
+    //   }
+    // if(this.gameOver === true){
+    //   this.resetBoard()
+    //   return this.result}
   }
 
     
   checkMove() {
-    const targetRowIndex = this.player.move[0]
-    const targetColumnIndex = this.player.move[1]
+    const targetRowIndex = this.playerMove[0]
+    const targetColumnIndex = this.playerMove[1]
 
     if(this.board.newBoard[targetRowIndex][targetColumnIndex] === '*') {
       this.movePermitted = true}
