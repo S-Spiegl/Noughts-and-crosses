@@ -1,6 +1,8 @@
 const Game = require('./game')
-// const TurnChecker = require('./turnChecker')
-//even requiring the actual turnChecker rather than the mock doesn't seem to help
+const Player = require('./player')
+const Board = require('./board')
+jest.mock('./player')
+jest.mock('./board')
 
 describe('Game', () => {
   describe('.board', () => {
@@ -32,11 +34,10 @@ describe('Game', () => {
         ])
       }
 
-      const mockPlayer = {
-        move: [1,0]
-      }
-
+      const mockPlayer = new Player;
       const game = new Game(mockBoard, mockPlayer);
+      mockPlayer.enterMove.mockImplementation(() => {return [1, 0]})
+      game.enterMove(1,0)
       game.checkMove();
       expect(game.movePermitted).toEqual(true)
     })    
@@ -52,12 +53,10 @@ describe('Game', () => {
         ])
       }
 
-      const mockPlayerOne = {
-        move: [1,1]
-      }
-      
-
-      const game = new Game(mockBoard, mockPlayerOne);
+      const mockPlayer = new Player;
+      const game = new Game(mockBoard, mockPlayer);
+      mockPlayer.enterMove.mockImplementation(() => {return [1, 1]})
+      game.enterMove(1,0)
       game.checkMove();
         expect(game.movePermitted).toEqual(false)
     })    

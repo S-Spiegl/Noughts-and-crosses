@@ -1,11 +1,11 @@
 class Player {
-  constructor() {
-    this.move = []
+  
+  enterMove(row, column) {
+      return [row, column]
   }
 
-  enterMove(row, column) {
-      this.move.push(row, column)
-  }
+  //rewrite this function so it just returns this array
+  //this.playerMove = player.enterMove(1,0)
 
 }
 

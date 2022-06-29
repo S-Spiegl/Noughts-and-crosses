@@ -11,6 +11,10 @@ class Board {
     ]
   }
 
+  getBoard() {
+    return this.newBoard
+  }
+
   resetBoard() {
     this.newBoard = [
       "***",
