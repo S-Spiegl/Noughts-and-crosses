@@ -6,9 +6,11 @@ class Game {
     this.turnChecker = turnChecker
     this.movePermitted = false
     this.gameOver = false
+    this.result = ""
   }
 
   enterMove(row, column) {
+    this.result = ""
     this.player.enterMove(row, column)
     this.checkMove()
     if(this.movePermitted === false){
@@ -21,9 +23,11 @@ class Game {
         this.movePermitted = false
         console.log(this.board.newBoard.join('\r\n'))
       }
-    if(this.gameOver === true)
-      {return this.callGame()}
+    if(this.gameOver === true){
+      this.resetBoard()
+      return this.result}
   }
+
     
   checkMove() {
     const targetRowIndex = this.player.move[0]
@@ -40,17 +44,29 @@ class Game {
   callGame() {
     if(this.playerOneWins()){
       this.gameOver = true
-      return 'Player One wins!'
+      this.result = 'Player One wins!'
     }
     else if(this.playerTwoWins()
             ){
       this.gameOver = true
-      return 'Player Two wins!'
+      this.result = 'Player Two wins!'
     }
     else if(this.playerOneWins() === false && this.playerTwoWins() === false && this.board.boardFull() === true){
       this.gameOver = true
-      return 'Draw!'}
+      this.result = 'Draw!'}
   }
+
+  // returnResult() {
+  //   if(this.playerOneWins()){
+  //     return 'Player One wins!'
+  //   }
+  //   else if(this.playerTwoWins()
+  //           ){
+  //     return 'Player Two wins!'
+  //   }
+  //   else if(this.playerOneWins() === false && this.playerTwoWins() === false && this.board.boardFull() === true){
+  //     return 'Draw!'}
+  // }
 
   playerOneWins() {
       if(this.board.newBoard[0] === "XXX" || 
@@ -76,6 +92,12 @@ class Game {
     this.board.newBoard[0][2] === "O" && this.board.newBoard[1][1] === "O" && this.board.newBoard[2][0] === "O")
       {return true}
     else{return false}
+  }
+
+  resetBoard() {
+      this.board.resetBoard()
+      this.gameOver = false
+      this.turnChecker.turnCounter = 0
   }
 }
 

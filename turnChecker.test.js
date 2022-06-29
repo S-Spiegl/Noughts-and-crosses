@@ -10,5 +10,4 @@ describe('TurnChecker', () => {
       expect(turnChecker.turnCounter).toEqual(1)
     })
   })
-  
 })

@@ -36,7 +36,6 @@ describe('Board', () => {
         "XOO",
         "OXX",
       ]
-      //needs more investigation - miscommunication occurring somewhere...
       expect(board.boardFull()).toEqual(true)
     })
   })
