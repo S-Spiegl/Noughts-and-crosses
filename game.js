@@ -4,10 +4,6 @@ class Game {
     this.player = player
     this.boardUpdater = boardUpdater
     this.turnChecker = turnChecker
-    // this.playerMove = this.player.enterMove()
-    //need to have playerMove = the return value from player.enterMove()
-    //this appears to be correct, according to node... so the fact that it isn't recognising enterMove() as
-    //a function might have something to do with the test?
     this.movePermitted = false
     this.gameOver = false
     this.result = ""
