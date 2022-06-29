@@ -15,15 +15,15 @@ class BoardUpdater {
     }
   }
 
-  addCrossToBoard() {
-    const targetRowIndex = this.player.move[0]
-    const targetColumnIndex = this.player.move[1]
+  addCrossToBoard(targetRowIndex, targetColumnIndex) {
+    // const targetRowIndex = this.player.move[0]
+    // const targetColumnIndex = this.player.move[1]
 
-    if(this.board.newBoard[targetRowIndex][targetColumnIndex] === '*') {
-      const targetRow = this.board.newBoard[targetRowIndex].split('')
+    if(this.board.board[targetRowIndex][targetColumnIndex] === '*') {
+      const targetRow = this.board.board[targetRowIndex].split('')
       targetRow.splice(targetColumnIndex,1,'X')
       const updatedRow = targetRow.join('')
-      this.board.newBoard.splice(targetRowIndex, 1, updatedRow)
+      this.board.board.splice(targetRowIndex, 1, updatedRow)
       // this.playerOnePlayed = true
       this.player.move = []}
     else{
@@ -31,15 +31,15 @@ class BoardUpdater {
       return 'space taken'}
   } 
   
-  addNoughtToBoard() {
-    const targetRowIndex = this.player.move[0]
-    const targetColumnIndex = this.player.move[1]
+  addNoughtToBoard(targetRowIndex, targetColumnIndex) {
+    // const targetRowIndex = this.player.move[0]
+    // const targetColumnIndex = this.player.move[1]
 
-    if(this.board.newBoard[targetRowIndex][targetColumnIndex] === '*') {
-      const targetRow = this.board.newBoard[targetRowIndex].split('')
+    if(this.board.board[targetRowIndex][targetColumnIndex] === '*') {
+      const targetRow = this.board.board[targetRowIndex].split('')
       targetRow.splice(targetColumnIndex,1,'O')
       const updatedRow = targetRow.join('')
-      this.board.newBoard.splice(targetRowIndex, 1, updatedRow)
+      this.board.board.splice(targetRowIndex, 1, updatedRow)
       // this.playerTwoPlayed = true
       this.player.move = []}
     else{

@@ -19,10 +19,10 @@ describe('Board', () => {
     })
   })
 
-  describe('.newBoard', () => {
+  describe('.getBoard', () => {
     const board = new Board();
-    it('initializes with an empty board when class is instantiated', () => {
-      expect(board.newBoard).toEqual([
+    it('returns the current state of the board', () => {
+      expect(board.getBoard()).toEqual([
         "***",
         "***",
         "***"

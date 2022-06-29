@@ -1,5 +1,7 @@
 How to test properly for the reset() function? Easy to test that it resets gameOver... less easy for dependencies like turnChecker and board... Declare them as mocks and see if the logic as it stands resets them via the constructor in the same way it resets the real ones (i.e accesses the dependencies and alters them). I imagine it will work for turnChecker as it's directly accessing a value that is declared as mock, namely the turnCounter... but resetting the board involves calling a method within the board class... how do you access that via the mock, unless you create the method in the mock...
 
+//refactoring to try and get all instance variables in the game class, with none in the dependencies 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 How to play:

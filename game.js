@@ -28,15 +28,28 @@ class Game {
     //   return this.result}
   }
 
+  updateBoard() {
+    const targetRowIndex = this.playerMove[0]
+    const targetColumnIndex = this.playerMove[1]
+
+    if(this.playerMove.length != 0){
+      if(this.turnChecker.turnCounter % 2 == 0){
+        this.boardUpdater.addCrossToBoard(targetRowIndex, targetColumnIndex)
+        this.playerMove = []}
+      else{this.boardUpdater.addNoughtToBoard(targetRowIndex, targetColumnIndex)
+        this.playerMove = []} 
+    }
+  }
+
     
   checkMove() {
     const targetRowIndex = this.playerMove[0]
     const targetColumnIndex = this.playerMove[1]
 
-    if(this.board.newBoard[targetRowIndex][targetColumnIndex] === '*') {
+    if(this.board.getBoard()[targetRowIndex][targetColumnIndex] === '*') {
       this.movePermitted = true}
     else{
-      this.player.move = []
+      this.playerMove = []
       this.movePermitted = false
     }
   }
@@ -69,14 +82,14 @@ class Game {
   // }
 
   playerOneWins() {
-      if(this.board.newBoard[0] === "XXX" || 
-        this.board.newBoard[1] === "XXX" || 
-        this.board.newBoard[2] === "XXX" ||
-        this.board.newBoard[0][0] === "X" && this.board.newBoard[1][0] === "X" && this.board.newBoard[2][0] === "X" ||
-        this.board.newBoard[0][1] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][1] === "X" ||
-        this.board.newBoard[0][2] === "X" && this.board.newBoard[1][2] === "X" && this.board.newBoard[2][2] === "X" ||
-        this.board.newBoard[0][0] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][2] === "X" ||
-        this.board.newBoard[0][2] === "X" && this.board.newBoard[1][1] === "X" && this.board.newBoard[2][0] === "X")
+      if(this.board.board[0] === "XXX" || 
+        this.board.board[1] === "XXX" || 
+        this.board.board[2] === "XXX" ||
+        this.board.board[0][0] === "X" && this.board.board[1][0] === "X" && this.board.board[2][0] === "X" ||
+        this.board.board[0][1] === "X" && this.board.board[1][1] === "X" && this.board.board[2][1] === "X" ||
+        this.board.board[0][2] === "X" && this.board.board[1][2] === "X" && this.board.board[2][2] === "X" ||
+        this.board.board[0][0] === "X" && this.board.board[1][1] === "X" && this.board.board[2][2] === "X" ||
+        this.board.board[0][2] === "X" && this.board.board[1][1] === "X" && this.board.board[2][0] === "X")
         {return true}
       else{return false}
   }

@@ -5,38 +5,17 @@ jest.mock('./player')
 jest.mock('./board')
 
 describe('Game', () => {
-  describe('.board', () => {
-    it('shows a clean board at the beginning of the game', () => {
-      const mockBoard = {
-        newBoard: ([
-          "***",
-          "***",
-          "***"
-        ])
-      }
-
-      const game = new Game(mockBoard);
-      expect(game.board.newBoard).toEqual(([
-        "***",
-        "***",
-        "***",
-        ]))
-    })
-  })
-
   describe('.checkMove', () => {
     it('checks if a space is occupied, permitting a move if it is free', () => {
-      const mockBoard = {
-        newBoard: ([
-          "***",
-          "*X*",
-          "**O",
-        ])
-      }
-
       const mockPlayer = new Player;
+      const mockBoard = new Board;
       const game = new Game(mockBoard, mockPlayer);
       mockPlayer.enterMove.mockImplementation(() => {return [1, 0]})
+      mockBoard.getBoard.mockImplementation(() => {return [
+        "***",
+        "*X*",
+        "**O",
+      ]})
       game.enterMove(1,0)
       game.checkMove();
       expect(game.movePermitted).toEqual(true)
@@ -45,17 +24,15 @@ describe('Game', () => {
 
   describe('.checkMove', () => {
     it('checks if a space is occupied, refusing a move if it is not free', () => {
-      const mockBoard = {
-        newBoard: ([
-          "***",
-          "*X*",
-          "**O",
-        ])
-      }
-
       const mockPlayer = new Player;
+      const mockBoard = new Board;
       const game = new Game(mockBoard, mockPlayer);
       mockPlayer.enterMove.mockImplementation(() => {return [1, 1]})
+      mockBoard.getBoard.mockImplementation(() => {return [
+        "***",
+        "*X*",
+        "**O",
+      ]})
       game.enterMove(1,0)
       game.checkMove();
         expect(game.movePermitted).toEqual(false)
@@ -92,15 +69,22 @@ describe('Game', () => {
 
   describe('.callGame', () => {
     it('calls the game for playerOne if there are three horizontal Xs', () => {
-      const mockBoard = {
-        newBoard: ([
-          "XXX",
-          "*O*",
-          "**O",
-        ])
-      }
+      // const mockBoard = {
+      //   newBoard: ([
+      //     "XXX",
+      //     "*O*",
+      //     "**O",
+      //   ])
+      // }
 
+      const mockBoard = new Board
+      // const mockPlayer = new Player
       const game = new Game(mockBoard);
+      mockBoard.getBoard.mockImplementation(() => {return [
+            "XXX",
+            "*O*",
+            "**O",
+          ] })
       game.callGame()
       expect(game.result).toEqual('Player One wins!')
     })

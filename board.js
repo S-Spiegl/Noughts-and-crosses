@@ -1,6 +1,6 @@
 class Board {
   constructor() {
-    this.newBoard = this.new()
+    this.board = this.new()
   }
 
   new() {
@@ -12,11 +12,12 @@ class Board {
   }
 
   getBoard() {
-    return this.newBoard
+    return this.board
   }
+  //can now call this method using auto-mocks rather than an instance variable 
 
   resetBoard() {
-    this.newBoard = [
+    this.board = [
       "***",
       "***",
       "***"

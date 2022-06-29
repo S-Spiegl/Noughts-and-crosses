@@ -10,8 +10,7 @@ describe('PlayerOne', () => {
 
   describe('.enterMove', () => {
     it("registers playerOne's move", () => {
-      player.enterMove(1,2)
-      expect(player.move).toEqual([1,2])
+      expect(player.enterMove(1,2)).toEqual([1,2])
     })
   })
     
