@@ -1,9 +1,10 @@
 const Game = require('./game')
-const Player = require('./player')
 const Board = require('./board')
+const Player = require('./player')
 const BoardUpdater = require('./boardUpdater')
-jest.mock('./player')
 jest.mock('./board')
+jest.mock('./player')
+jest.mock('./boardUpdater')
 
 describe('Game', () => {
   describe('.checkMove', () => {
@@ -12,15 +13,20 @@ describe('Game', () => {
       const mockBoard = new Board;
       const mockBoardUpdater = new BoardUpdater(mockBoard);
       const game = new Game(mockBoard, mockPlayer, mockBoardUpdater);
-      mockPlayer.enterMove.mockImplementation(() => {return [1, 0]})
+      mockPlayer.enterMove.mockImplementation(() => {return [0, 1]})
+      //the above coordinates, as entered in the mockPlayer, are what are resulting in 
+      //TypeError: Cannot read properties of undefined (reading '0')
+      //I've given the board as an argument to mockUpdater, so it has its dependency, and the game has
+      //all the correct dependencies. A bit stumped...
+      
       // mockBoardUpdater.addCrossToBoard.mockImplementation(() => {return 'board updated'})
       mockBoard.getBoard.mockImplementation(() => {return [
         "***",
         "*X*",
         "**O",
       ]})
-      game.enterMove(1,0)
-      game.checkMove();
+      game.enterMove(0,1)
+      // game.checkMove();
       expect(game.movePermitted).toEqual(true)
     })    
   })
@@ -46,7 +52,7 @@ describe('Game', () => {
     
     it.skip('resets the player move array to [] if a space is taken to allow them to enter new coordinates', () => {
       const mockBoard = {
-        newBoard: ([
+        getBoard: () => ([
           "***",
           "*X*",
           "**O",
@@ -57,13 +63,12 @@ describe('Game', () => {
       //   turns: ['X', 'O']
       // }
 
-      const mockPlayer = {
-        move: [1,1]
-      }
+      // const mockPlayer = {
+      //   move: [1,1]
+      // }
 
-      const game = new Game(mockBoard, mockPlayer);
-      // expect(game.playerOneEnterMove()).toEqual('space taken')
-      game.EnterMove(1,1);
+      const game = new Game(mockBoard);
+      game.EnterMove(1,1)
       expect(game.playerMove).toEqual([])
 
       //not working. Do you need to call return somewhere?
@@ -73,7 +78,7 @@ describe('Game', () => {
   describe('.callGame', () => {
     it('calls the game for playerOne if there are three horizontal Xs', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XXX",
           "*O*",
           "**O",
@@ -96,7 +101,7 @@ describe('Game', () => {
 
     it('calls the game for playerTwo if there are three horizontal Os', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XX*",
           "OOO",
           "X**",
@@ -110,7 +115,7 @@ describe('Game', () => {
 
     it('calls the game for playerOne if there are three vertical Xs', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XO*",
           "XO*",
           "X**",
@@ -124,7 +129,7 @@ describe('Game', () => {
 
     it('calls the game for playerOne if there are three Xs in a diagonal', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XO*",
           "*XO",
           "**X",
@@ -138,7 +143,7 @@ describe('Game', () => {
 
     it('calls the game for playerTwo if there are three vertical Os', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XOX",
           "XO*",
           "*O*",
@@ -152,7 +157,7 @@ describe('Game', () => {
 
     it('calls the game for playerTwo if there are three Os in a diagonal', () => {
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XXO",
           "*O*",
           "O*X",
@@ -167,7 +172,7 @@ describe('Game', () => {
     it('calls a draw if all the board is filled and there is no winner', () => {
       
       const mockBoard = {
-        board: ([
+        getBoard: () => ([
           "XOX",
           "XOO",
           "OXX",

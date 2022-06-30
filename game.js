@@ -11,6 +11,7 @@ class Game {
 
   enterMove(row, column) {
     this.result = ""
+    this.movePermitted = false
     this.playerMove = this.player.enterMove(row, column)
     this.checkMove()
     if(this.movePermitted === false){
@@ -18,11 +19,10 @@ class Game {
       }
       else{
         this.updateBoard()
-        //problem is with update board in tests... what should the mock of the boardUpdater return?
         this.turnCounter += 1
         this.callGame()
-        this.movePermitted = false
-        console.log(this.board.board.join('\r\n'))
+        this.movePermitted = true
+        console.log(this.board.getBoard().join('\r\n'))
       }
     if(this.gameOver === true){
       this.resetBoard()
@@ -71,27 +71,27 @@ class Game {
   }
 
   playerOneWins() {
-      if(this.board.board[0] === "XXX" || 
-        this.board.board[1] === "XXX" || 
-        this.board.board[2] === "XXX" ||
-        this.board.board[0][0] === "X" && this.board.board[1][0] === "X" && this.board.board[2][0] === "X" ||
-        this.board.board[0][1] === "X" && this.board.board[1][1] === "X" && this.board.board[2][1] === "X" ||
-        this.board.board[0][2] === "X" && this.board.board[1][2] === "X" && this.board.board[2][2] === "X" ||
-        this.board.board[0][0] === "X" && this.board.board[1][1] === "X" && this.board.board[2][2] === "X" ||
-        this.board.board[0][2] === "X" && this.board.board[1][1] === "X" && this.board.board[2][0] === "X")
+      if(this.board.getBoard()[0] === "XXX" || 
+        this.board.getBoard()[1] === "XXX" || 
+        this.board.getBoard()[2] === "XXX" ||
+        this.board.getBoard()[0][0] === "X" && this.board.getBoard()[1][0] === "X" && this.board.getBoard()[2][0] === "X" ||
+        this.board.getBoard()[0][1] === "X" && this.board.getBoard()[1][1] === "X" && this.board.getBoard()[2][1] === "X" ||
+        this.board.getBoard()[0][2] === "X" && this.board.getBoard()[1][2] === "X" && this.board.getBoard()[2][2] === "X" ||
+        this.board.getBoard()[0][0] === "X" && this.board.getBoard()[1][1] === "X" && this.board.getBoard()[2][2] === "X" ||
+        this.board.getBoard()[0][2] === "X" && this.board.getBoard()[1][1] === "X" && this.board.getBoard()[2][0] === "X")
         {return true}
       else{return false}
   }
 
   playerTwoWins() {
-    if(this.board.board[0] === "OOO" || 
-    this.board.board[1] === "OOO" || 
-    this.board.board[2] === "OOO" ||
-    this.board.board[0][0] === "O" && this.board.board[1][0] === "O" && this.board.board[2][0] === "O" ||
-    this.board.board[0][1] === "O" && this.board.board[1][1] === "O" && this.board.board[2][1] === "O" ||
-    this.board.board[0][2] === "O" && this.board.board[1][2] === "O" && this.board.board[2][2] === "O" ||
-    this.board.board[0][0] === "O" && this.board.board[1][1] === "O" && this.board.board[2][2] === "O" ||
-    this.board.board[0][2] === "O" && this.board.board[1][1] === "O" && this.board.board[2][0] === "O")
+    if(this.board.getBoard()[0] === "OOO" || 
+    this.board.getBoard()[1] === "OOO" || 
+    this.board.getBoard()[2] === "OOO" ||
+    this.board.getBoard()[0][0] === "O" && this.board.getBoard()[1][0] === "O" && this.board.getBoard()[2][0] === "O" ||
+    this.board.getBoard()[0][1] === "O" && this.board.getBoard()[1][1] === "O" && this.board.getBoard()[2][1] === "O" ||
+    this.board.getBoard()[0][2] === "O" && this.board.getBoard()[1][2] === "O" && this.board.getBoard()[2][2] === "O" ||
+    this.board.getBoard()[0][0] === "O" && this.board.getBoard()[1][1] === "O" && this.board.getBoard()[2][2] === "O" ||
+    this.board.getBoard()[0][2] === "O" && this.board.getBoard()[1][1] === "O" && this.board.getBoard()[2][0] === "O")
       {return true}
     else{return false}
   }
