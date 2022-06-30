@@ -31,7 +31,7 @@ describe('Board', () => {
 
     it('records when the board is full', () => {
       let board = new Board();
-      board.newBoard = [
+      board.board = [
         "XOX",
         "XOO",
         "OXX",

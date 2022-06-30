@@ -1,7 +1,6 @@
 class TurnChecker {
   constructor() {
     this.turnCounter = 0
-    // this.turns = []
   }
 
   incrementTurnCounter() {

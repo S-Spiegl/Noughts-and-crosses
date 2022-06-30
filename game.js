@@ -1,9 +1,9 @@
 class Game {
-  constructor(board, player, boardUpdater, turnChecker) {
+  constructor(board, player, boardUpdater) {
     this.board = board
     this.player = player
     this.boardUpdater = boardUpdater
-    this.turnChecker = turnChecker
+    this.turnCounter = 0
     this.movePermitted = false
     this.gameOver = false
     this.result = ""
@@ -18,7 +18,8 @@ class Game {
       }
       else{
         this.updateBoard()
-        this.turnChecker.incrementTurnCounter()
+        //problem is with update board in tests... what should the mock of the boardUpdater return?
+        this.turnCounter += 1
         this.callGame()
         this.movePermitted = false
         console.log(this.board.board.join('\r\n'))
@@ -33,7 +34,7 @@ class Game {
     const targetColumnIndex = this.playerMove[1]
 
     if(this.playerMove.length != 0){
-      if(this.turnChecker.turnCounter % 2 == 0){
+      if(this.turnCounter % 2 == 0){
         this.boardUpdater.addCrossToBoard(targetRowIndex, targetColumnIndex)
         this.playerMove = []}
       else{this.boardUpdater.addNoughtToBoard(targetRowIndex, targetColumnIndex)
@@ -69,18 +70,6 @@ class Game {
       this.result = 'Draw!'}
   }
 
-  // returnResult() {
-  //   if(this.playerOneWins()){
-  //     return 'Player One wins!'
-  //   }
-  //   else if(this.playerTwoWins()
-  //           ){
-  //     return 'Player Two wins!'
-  //   }
-  //   else if(this.playerOneWins() === false && this.playerTwoWins() === false && this.board.boardFull() === true){
-  //     return 'Draw!'}
-  // }
-
   playerOneWins() {
       if(this.board.board[0] === "XXX" || 
         this.board.board[1] === "XXX" || 
@@ -110,7 +99,7 @@ class Game {
   resetBoard() {
       this.board.resetBoard()
       this.gameOver = false
-      this.turnChecker.turnCounter = 0
+      this.turnCounter = 0
   }
 }
 

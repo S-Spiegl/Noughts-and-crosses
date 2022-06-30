@@ -1,6 +1,7 @@
 const Game = require('./game')
 const Player = require('./player')
 const Board = require('./board')
+const BoardUpdater = require('./boardUpdater')
 jest.mock('./player')
 jest.mock('./board')
 
@@ -9,8 +10,10 @@ describe('Game', () => {
     it('checks if a space is occupied, permitting a move if it is free', () => {
       const mockPlayer = new Player;
       const mockBoard = new Board;
-      const game = new Game(mockBoard, mockPlayer);
+      const mockBoardUpdater = new BoardUpdater(mockBoard);
+      const game = new Game(mockBoard, mockPlayer, mockBoardUpdater);
       mockPlayer.enterMove.mockImplementation(() => {return [1, 0]})
+      // mockBoardUpdater.addCrossToBoard.mockImplementation(() => {return 'board updated'})
       mockBoard.getBoard.mockImplementation(() => {return [
         "***",
         "*X*",
@@ -34,7 +37,7 @@ describe('Game', () => {
         "**O",
       ]})
       game.enterMove(1,0)
-      game.checkMove();
+      // game.checkMove();
         expect(game.movePermitted).toEqual(false)
     })    
   })
@@ -61,7 +64,7 @@ describe('Game', () => {
       const game = new Game(mockBoard, mockPlayer);
       // expect(game.playerOneEnterMove()).toEqual('space taken')
       game.EnterMove(1,1);
-      expect(game.player.move).toEqual([])
+      expect(game.playerMove).toEqual([])
 
       //not working. Do you need to call return somewhere?
     })
@@ -69,29 +72,31 @@ describe('Game', () => {
 
   describe('.callGame', () => {
     it('calls the game for playerOne if there are three horizontal Xs', () => {
-      // const mockBoard = {
-      //   newBoard: ([
-      //     "XXX",
-      //     "*O*",
-      //     "**O",
-      //   ])
-      // }
+      const mockBoard = {
+        board: ([
+          "XXX",
+          "*O*",
+          "**O",
+        ])
+      }
 
-      const mockBoard = new Board
+      // mockBoard.getBoard.mockImplementation(() => {return [
+      //   "XXX",
+      //   "*O*",
+      //   "**O",
+      // ] })
+      
+      // const mockBoard = new Board
       // const mockPlayer = new Player
       const game = new Game(mockBoard);
-      mockBoard.getBoard.mockImplementation(() => {return [
-            "XXX",
-            "*O*",
-            "**O",
-          ] })
+      
       game.callGame()
       expect(game.result).toEqual('Player One wins!')
     })
 
     it('calls the game for playerTwo if there are three horizontal Os', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XX*",
           "OOO",
           "X**",
@@ -105,7 +110,7 @@ describe('Game', () => {
 
     it('calls the game for playerOne if there are three vertical Xs', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XO*",
           "XO*",
           "X**",
@@ -119,7 +124,7 @@ describe('Game', () => {
 
     it('calls the game for playerOne if there are three Xs in a diagonal', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XO*",
           "*XO",
           "**X",
@@ -133,7 +138,7 @@ describe('Game', () => {
 
     it('calls the game for playerTwo if there are three vertical Os', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XOX",
           "XO*",
           "*O*",
@@ -147,7 +152,7 @@ describe('Game', () => {
 
     it('calls the game for playerTwo if there are three Os in a diagonal', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XXO",
           "*O*",
           "O*X",
@@ -162,7 +167,7 @@ describe('Game', () => {
     it('calls a draw if all the board is filled and there is no winner', () => {
       
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XOX",
           "XOO",
           "OXX",
@@ -181,7 +186,7 @@ describe('Game', () => {
   describe('.reset', () => {
     it('changes the status of gameOver back to false', () => {
       const mockBoard = {
-        newBoard: ([
+        board: ([
           "XOX",
           "XOO",
           "OXX",
@@ -199,9 +204,9 @@ describe('Game', () => {
         
       }
 
-      const mockTurnChecker = {
-        turnCounter: 8
-      }
+      // const mockTurnChecker = {
+      //   turnCounter: 8
+      // }
 
   // let MockTurnChecker = jest.fn();
   //   MockTurnChecker.mockImplementation(() => ({
@@ -214,10 +219,10 @@ describe('Game', () => {
       //the test to recognise the turnChecker at all...
 
       // const mockTurnChecker = new MockTurnChecker
-      const game = new Game(mockBoard, mockPlayer, mockBoardUpdater, mockTurnChecker);
+      const game = new Game(mockBoard, mockPlayer, mockBoardUpdater);
       game.resetBoard()
       expect(game.gameOver).toEqual(false)
-      expect(game.turnChecker.turnCounter).toEqual(0)
+      expect(game.turnCounter).toEqual(0)
       // expect(game.board.newBoard).toEqual([
       //   "***",
       //   "***",

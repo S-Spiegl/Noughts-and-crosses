@@ -3,7 +3,7 @@ const BoardUpdater = require('./boardUpdater')
 describe('.updateBoard', () => {
   it('adds an X to the board when playerOne makes a legal move', () => {
     const mockBoard = {
-      newBoard: ([
+      board: ([
         "***",
         "***",
         "***"
@@ -14,13 +14,9 @@ describe('.updateBoard', () => {
       move: [1,1]
     }
 
-    const mockTurnChecker = {
-      turnCounter: 0
-    }
-    
-    const boardUpdater = new BoardUpdater(mockBoard, mockPlayer, mockTurnChecker);
-    boardUpdater.updateBoard();
-    expect(boardUpdater.board.newBoard).toEqual(([
+    const boardUpdater = new BoardUpdater(mockBoard, mockPlayer);
+    boardUpdater.addCrossToBoard(1,1);
+    expect(boardUpdater.board.board).toEqual(([
       "***",
       "*X*",
       "***",
@@ -30,52 +26,21 @@ describe('.updateBoard', () => {
 
   it('adds an O to the board when playerTwo makes a legal move', () => {
     const mockBoard = {
-      newBoard: ([
+      board: ([
         "***",
         "X**",
         "***"
       ])
     }
 
-    const mockPlayer = {
-      move: [1,1]
-    }
-
-    const mockTurnChecker = {
-      turnCounter: 1
-    }
-    
-    const boardUpdater = new BoardUpdater(mockBoard, mockPlayer, mockTurnChecker);
-    boardUpdater.updateBoard();
-    expect(boardUpdater.board.newBoard).toEqual(([
+    const boardUpdater = new BoardUpdater(mockBoard);
+    boardUpdater.addNoughtToBoard(1,1);
+    expect(boardUpdater.board.board).toEqual(([
       "***",
       "XO*",
       "***",
       ]))
 
-  })
-
-  it("clears playerOne's move from the move array after updating the board", () => {
-    const mockBoard = {
-      newBoard: ([
-        "***",
-        "***",
-        "***"
-      ])
-    }
-
-    const mockPlayerOne = {
-      move: [1,1]
-
-    }
-
-    const mockTurnChecker = {
-      turnCounter: 1
-    }
-
-    const boardUpdater = new BoardUpdater(mockBoard, mockPlayerOne, mockTurnChecker);
-    boardUpdater.updateBoard();
-    expect(boardUpdater.player.move).toEqual([])
   })
 
   // it.skip('retains the move information on the board', () => {

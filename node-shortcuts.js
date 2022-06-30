@@ -1,10 +1,8 @@
 const Game = require('./game')
 const Player = require('./player');
 const Board = require('./board');
-const TurnChecker = require('./turnChecker')
 const BoardUpdater = require('./boardUpdater')
 const player = new Player;
 const board = new Board;
-const turnChecker = new TurnChecker
-const boardUpdater = new BoardUpdater(board, player, turnChecker);
-const game = new Game(board, player, boardUpdater, turnChecker);
+const boardUpdater = new BoardUpdater(board);
+const game = new Game(board, player, boardUpdater);

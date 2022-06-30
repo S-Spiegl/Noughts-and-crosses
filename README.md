@@ -1,6 +1,10 @@
-How to test properly for the reset() function? Easy to test that it resets gameOver... less easy for dependencies like turnChecker and board... Declare them as mocks and see if the logic as it stands resets them via the constructor in the same way it resets the real ones (i.e accesses the dependencies and alters them). I imagine it will work for turnChecker as it's directly accessing a value that is declared as mock, namely the turnCounter... but resetting the board involves calling a method within the board class... how do you access that via the mock, unless you create the method in the mock...
+At Anish's suggestion, I've tried to remove instance variables from the dependencies. I've succeeded in doing this with the player and the boardUpdater class at this stage. I could probably also take said dependencies from the turnChecker, transferring the counter to the game class, and I guess I could do the same with the board.
 
-//refactoring to try and get all instance variables in the game class, with none in the dependencies 
+I'm concerned that this will lead to the dependencies becoming smaller and the main class becoming bloated, so would be interested to hear a coach's opinion on this. I understand that reducing the number of instance variables in the will loosen the coupling of classes. Is my code acceptable as things stand, or should I aim to have no instance variables in the dependencies whatsoever? If you look at my commits prior to this change in direction (give commit number), you'll see that the classes are more evenly matched in terms of size, or at least game is slightly smaller and its dependencies are slightly bigger. Is the trade off in balancing classes an acceptable side-effect of reducing instance variables in dependencies? Would be interested to hear your thoughts.
+
+I began by using manual mocks and then switched to auto-mocks when refactoring, having gained a bit more comprehension in the former to facilitate learning the latter. 
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,13 +17,11 @@ How to play:
 const Game = require('./game')
 const Player = require('./player');
 const Board = require('./board');
-const TurnChecker = require('./turnChecker')
 const BoardUpdater = require('./boardUpdater')
 const player = new Player;
 const board = new Board;
-const turnChecker = new TurnChecker
-const boardUpdater = new BoardUpdater(board, player, turnChecker);
-const game = new Game(board, player, boardUpdater, turnChecker);
+const boardUpdater = new BoardUpdater(board);
+const game = new Game(board, player, boardUpdater);
 
 4. To take a turn, enter the following (replacing x with the target row, and  y with the target column):
 game.enterMove(x,y)
