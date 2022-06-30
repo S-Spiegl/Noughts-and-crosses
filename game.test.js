@@ -48,27 +48,30 @@ describe('Game', () => {
     })    
   })
 
-  describe('.playerOneEnterMove', () => {
+  describe('.enterMove', () => {
     
-    it.skip('resets the player move array to [] if a space is taken to allow them to enter new coordinates', () => {
-      const mockBoard = {
-        getBoard: () => ([
-          "***",
-          "*X*",
-          "**O",
-        ])
-      }
-
-      // const mockTurnChecker = {
-      //   turns: ['X', 'O']
+    it('resets the player move array to [] if a space is taken to allow them to enter new coordinates', () => {
+      // const mockBoard = {
+      //   getBoard: () => ([
+      //     "***",
+      //     "*X*",
+      //     "**O",
+      //   ])
       // }
 
-      // const mockPlayer = {
-      //   move: [1,1]
-      // }
+      const mockPlayer = new Player;
+      const mockBoard = new Board;
+      const mockBoardUpdater = new BoardUpdater(mockBoard);
+      const game = new Game(mockBoard, mockPlayer, mockBoardUpdater);
+      mockPlayer.enterMove.mockImplementation(() => {return [0,1]} )
+      mockBoard.getBoard.mockImplementation(() => {return [
+        "***",
+        "*X*",
+        "**O",
+      ]})
 
-      const game = new Game(mockBoard);
-      game.EnterMove(1,1)
+      // const game = new Game(mockBoard, mockPlayer);
+      game.enterMove(0,1)
       expect(game.playerMove).toEqual([])
 
       //not working. Do you need to call return somewhere?
